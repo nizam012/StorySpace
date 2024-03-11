@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link href="{{ url_for('static', filename='images/books.png') }}" rel="icon">
+
+    <style>
+        .login-dark {
+            height: 643px;
+            background-image: url('static/images/bck.jpg');
+            /* background: #83a4d4;
+            background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);
+            background: linear-gradient(to right, #b6fbff, #83a4d4); */
+            background-size: cover;
+            position: relative;
+        }
+        
+        .login-dark form {
+            max-width: 320px;
+            width: 90%;
+            background-color: #c4c4c450;
+            padding: 40px;
+            border-radius: 4px;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            color: rgb(126, 3, 28);
+            box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .bg {
+            background: #83a4d4;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #b6fbff, #83a4d4);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background-size: cover;
+        }
+        
+        .login-dark .illustration {
+            text-align: center;
+            padding: 15px 0 20px;
+            font-size: 100px;
+            color: #2980ef;
+        }
+        
+        .login-dark form .form-control {
+            background: none;
+            border: none;
+            border-bottom: 1px solid #434a52;
+            border-radius: 0;
+            box-shadow: none;
+            outline: none;
+            color: inherit;
+        }
+        
+        .login-dark form .btn-primary {
+            background: #214a80;
+            border: none;
+            border-radius: 4px;
+            padding: 11px;
+            box-shadow: none;
+            margin-top: 26px;
+            text-shadow: none;
+            outline: none;
+        }
+        
+        .login-dark form .btn-primary:hover,
+        .login-dark form .btn-primary:active {
+            background: #214a80;
+            outline: none;
+        }
+        
+        .login-dark form .Register {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            color: #0a0c0e;
+            opacity: 0.9;
+            text-decoration: none;
+        }
+        
+        .login-dark form .forgot:hover,
+        .login-dark form .forgot:active {
+            opacity: 1;
+            text-decoration: none;
+        }
+        
+        .login-dark form .btn-primary:active {
+            transform: translateY(1px);
+        }
+        
+        .black {
+            color: #0a0c0e;
+        }
+    </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" style="margin: 0;" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-success alter-dismissable fade show " style="margin: 0;" role="alert ">
+        {{ message }}
+        <button type="button " class="close " data-dismiss="alert ">
+            <span aria-hidden="true ">&times;</span>
+          </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %} {% block content %} {%endblock%}
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js "></script>
+</body>
+
+</html>

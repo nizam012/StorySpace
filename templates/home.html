@@ -1,0 +1,137 @@
+{%extends "base.html"%}{% block nav %}
+<li class="breadcrumb-item">Home</li>
+<li class="breadcrumb-item"><a href="/purchased"> Your Book</a></li>
+<li class="breadcrumb-item"><a href="/logout">Logout</a></li>{% endblock %}{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+    * {
+        box-sizing: border-box;
+    }
+    
+    .wrapper {
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.15);
+        position: relative;
+        width: 450px;
+    }
+    
+    input {
+        width: 100%;
+        border: none;
+        height: 50px;
+        border-radius: 5px;
+        padding: 0px 40px 0px 10px;
+        font-size: 18px;
+        box-shadow: 0px 1px 4px rgba(255, 0, 0, 0.1);
+    }
+    
+    input:focus {
+        outline: none;
+    }
+    
+    button {
+        position: absolute;
+        border: none;
+        background: none;
+        top: 0;
+        right: 0;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+        width: 50px;
+    }
+    
+    button:focus {
+        outline: none;
+    }
+    
+    button i {
+        width: 100%;
+        color: #6d7b98;
+        line-height: 50px;
+        font-size: 22px;
+    }
+    
+    .results {
+        padding: 0px;
+    }
+    
+    .results ul {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .results ul li {
+        list-style: none;
+        border-radius: 3px;
+        opacity: 0;
+        display: none;
+        padding: 8px 12px;
+        transition: all .5s linear;
+    }
+    
+    .show .results ul li {
+        opacity: 1;
+        display: block;
+    }
+    
+    .show .results {
+        padding: 10px;
+    }
+    
+    .results ul li:hover {
+        background: #ececec
+    }
+</style>
+<div>
+    <div class="row">
+        <div class="col-sm-9 ml-auto">
+            <form class="d-flex col-7 " style="margin-top: .1in;" method="post" action='search'>
+                <!-- <input class="form-control me-sm" type="text" placeholder="Search" id="search" name="search" autocomplete="chrome-off">
+                <button class="btn btn-outline-dark  my-sm--1" type="submit" onclick="window.location.href='/search'">Search</button> -->
+                <div class="container">
+                    <div class="wrapper">
+                        <input type="text" name="search" id="search" placeholder="Type to search" autocomplete="chrome-off">
+                        <button><i class="fa fa-search"></i></button>
+                        <div class="results">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="h1 text-center text-muted">
+    Welcome
+</div>
+<div class="float-right"> <a class="btn btn-outline-primary" onclick=" window.location.href='/seller'"> Add Book <i class="fa fa-plus"></i></a>
+</div>
+<br>
+
+<!-- after search block check carefully -->
+<hr>
+<div class="contaienr">
+    {%for book in books %}{% set fname = 'uploads/' + book.photo %}
+    <div class="media" style=" padding: 1em;">
+        <img class=" align-self-start mr-5 img-thumbnail" height="220px" width="160px" src=" {{url_for( 'static',filename=fname)}} ">
+        <div class="media-body ">
+            <a href="/book/{{book.slug}} ">
+                <h4 class="mt-0 "> {{book.name}} </h4>
+            </a>
+            <br>
+            <h5 class="font-weight-bold ">₹ {{book.price}}</h5>{{book.des[0:120]}}................. <br>
+            <br> Author : {{book.auther}}
+            <p>Posted on : {{book.date}}</p>
+        </div>
+    </div>
+    <hr> {%endfor%}
+</div>
+
+<script>
+</script>
+
+{% endblock %}

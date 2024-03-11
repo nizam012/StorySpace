@@ -1,0 +1,147 @@
+{%extends "base.html"%}{% block title %}Purchase{% endblock %} {% block nav %}
+
+<li class="breadcrumb-item"><a href="/home">Home</a></li>
+<li class="breadcrumb-item"><a href="/book/{{book.slug}} ">detials</a></li>
+<li class="breadcrumb-item active">Gateway</li>
+<li class="breadcrumb-item"><a href="/logout">Logout</a></li>{% endblock %} {% block content %} {% set fname = 'uploads/' + book.photo %}
+<div class="container rounded" id='pucont'>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" style="margin: 0;" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    {% else %}
+
+    <div class="alert alert-success alter-dismissable fade show " style="margin: 0;" role="alert ">
+        {{ message }}
+        <button type="button " class="close " data-dismiss="alert ">
+            <span aria-hidden="true ">&times;</span>
+          </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+    <div class="row" id="cont">
+        <!-- <h1 style="margin-top:.5em;margin-bottom:.5em;"><span style="border-bottom: 2px solid red;">Learning Point</span></h1> -->
+        <h1 style="margin-top:.5em;margin-bottom:.5em;"><span style="border-bottom: 2px solid red;">StorySpace</span></h1>
+    </div>
+
+    <div class="row">
+        <div class="col-7">
+            <h4> <span style="color: gray; margin-left: 0.8em;margin: 1em;  " id="cont"> Find Your Book</span></h4>
+            <div class="d-flex " style="border-bottom: 1px solid rgb(0, 0, 0); font-family: cursive;">Item</div>
+            <div class="col paddingin">
+                <div class="media">
+                    <img class="rounded" src="{{url_for('static', filename=fname)}}" alt="" height="150px" width="auto">
+                    <div class="media-body mx-4">
+                        <h4 class="mt-0">{{book.name}}</h4>
+                        <i class="fa fa-rupee h5"> {{book.price}}</i>
+                        <div class='weight'> Author : {{book.auther}} </div>
+                        <div class="weight">Address : {{book.seller_address}} </div>
+                        <div class="weight">Phone no : {{book.seller_phone}} </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <form method="post" action="invoice/{{book.id}}">
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div class="form-outline">
+                                    <label class="form-label" for="form7Example1">First name</label>
+                                    <input type="text" name='fname' id="form7Example1" class="form-control" value="{{user.username}}" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Text input -->
+                        <div class="form-outline mb-2 col-6>
+                            <label class=" form-label " for="form7Example4 ">Address</label>
+                            <textarea id="form_message " name="desc " class="form-control " rows="3 " data-error="Please, leave us a message. "></textarea>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-2 ">
+                            <label class="form-label " for="form7Example5 ">Email</label>
+                            <input type="email " name='email' id="form7Example5 " class="form-control "  value='{{user.email}}' disabled  />
+                   
+                        </div>
+
+                        <!-- Number input -->
+                        <div class="form-outline mb-4 ">
+                            <label class="form-label " for="form7Example6 ">Phone</label>
+                            <input type=" number " id="number " class="form-control " name='phone' value='{{user.phone}}' disabled />
+                            
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- right side -->
+        <div class="col ">
+            <div class="d-flex " style="border-bottom: 1px solid rgb(0, 0, 0); font-family: cursive; ">Order CheckOut</div>
+            <div class="px-4 py-2 ">
+                <h5>Modes</h5>
+                <ul>
+                    <li>UPI
+
+                        <div class="container p-0 ">
+                            <div class="card px-4 ">
+                                <p class="h8 py-1 " style="margin: 0; ">Payment Details </p>
+                                <div class="row gx-3 ">
+                                    <div class="d-flex flex-column ">
+                                        <p class="text mb-1 ">UPI</p> <input class="form-control mb-3 pt-2 " type="text " placeholder="example : abc@ybl " name='upi'>
+                                    </div>
+                                </div>
+                                <div class="col-12 ">
+                                    <div class="pay-btn mb-3 ">
+                                        <button class="btn btn-outline-success " type="submit " onclick=" window.location.href='/purchase/invoice/{{book.id}}' "><span class="h5 "> Pay  </span> <i class="fa fa-rupee ">{{book.price}}</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <br>
+                    <li>
+                        Debit card or Credit card
+
+                        <div class="container p-0 ">
+                            <div class="card px-4 ">
+                                <p class="h8 py-1 ">Payment Details</p>
+                                <div class="row gx-3 ">
+                                    <div class="col-12 ">
+                                        <div class="d-flex flex-column ">
+                                            <p class="text mb-1 ">Card Holder</p> <input class="form-control mb-3 " name='cname' type="text " placeholder="Name on card ">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 ">
+                                        <div class="d-flex flex-column ">
+                                            <p class="text mb-1 ">Card Number</p> <input class="form-control mb-3 " type="text " name='cnumber' placeholder="1234 5678 4352 2678 ">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <div class="d-flex flex-column ">
+                                            <p class="text mb-1 ">Expiry</p> <input class="form-control mb-3 " type="text " name='cexp' placeholder="MM/YYYY ">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <div class="d-flex flex-column ">
+                                            <p class="text mb-1 ">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="password " name='ccv' placeholder="*** ">
+                                        </div>
+                                    </div>
+                                    <div class="pay-btn mb-3 ">
+                                        <button class="btn btn-outline-success "><span class="h5 "> Pay  </span> <i class="fa fa-rupee ">{{book.price}}</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

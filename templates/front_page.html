@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/css_front/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/css_front/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/css_front/owl.carousel.min.css') }}" rel="stylesheet">
+    <!-- <title>Learning_Point</title> -->
+    <title>StorySpace</title>
+    <link href="{{ url_for('static', filename='images/books.png') }}" rel="icon">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #ffffff;">
+            <div class="collapse navbar-collapse" style="padding:0" id="navbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 ">
+                            <a class="btn btn-lg btn-outline-light border-light" href="/home">
+                                <span>Login</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <img src="{{url_for('static', filename='images/home_page.jpg')}}" alt="Norway" style="width:100%;">
+            <div class="row">
+
+                <div class="text-homeimage centered">
+                    <div class="maintext-image text-center" data-scrollreveal="enter top over 2.2s after 0.3s">
+                        <!-- <span style="border-bottom: 5px solid red;">Learning Point</span> -->
+                        <span style="border-bottom: 5px solid red;">StorySpace</span>
+                    </div>
+                    <div class="subtext-image " data-scrollreveal="enter bottom over 2s after 0.4s">
+                        Find your Books
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- =============continer coursal ============== -->
+
+
+    <!-- ============= end continer coursal ============== -->
+
+
+    <!-- LATEST ITEMS =============================-->
+    <section class="item content">
+        <div class="container">
+            <div class="underlined-title">
+                <div class="editContent">
+                    <h1 class="text-center latestitems">LATEST BOOKS</h1>
+                </div>
+                <div class="wow-hr type_short">
+                    <span class="wow-hr-h">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				</span>
+                </div>
+            </div>
+
+                {% for book in books[0:] %}
+                    {% set fname = 'uploads/' + book.photo %}
+                    <div class="col-md-3">
+                        <div class="productbox">
+                            <div class="fadeshop">
+                                <div class="captionshop text-center" style="display: none;">
+                                    <h3>{{ book.name[0:15] }}</h3>
+                                    <p style="font-size: medium;">
+                                        {{ book.des[0:95] }}.....
+                                    </p>
+                                    <p>
+                                        <a href="/book/{{ book.slug }}" class="learn-more detailslearn"><i class="fa fa-link"></i> Details</a>
+                                    </p>
+                                </div>
+                                <span class="maxproduct"><img src="{{ url_for('static', filename=fname) }}" alt="" height="300px" width="260px"></span>
+                            </div>
+                            <div class="product-details">
+                                <a href="/book/{{ book.slug }}">
+                                    <h1 class="border" style="padding: .3em; font-size: small;" id="namepr{{ book.id }}">{{ book.name[0:15] }}</h1>
+                                </a>
+                                <span class="price">
+                                    <span class="edd_price"><i class="fa fa-rupee"></i> {{ book.price }}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div> 
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/jquery-.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/anim.js') }}"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $('.fadeshop').hover(
+                function() {
+                    $(this).find('.captionshop').fadeIn(150);
+                },
+                function() {
+                    $(this).find('.captionshop').fadeOut(150);
+                }
+            );
+        });
+    </script>
+</body>
+
+</html>

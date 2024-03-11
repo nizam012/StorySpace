@@ -1,0 +1,56 @@
+{%extends "base.html"%}{% block nav %}
+<li class="breadcrumb-item"><a href="/home">Home</a></li>
+<li class="breadcrumb-item active">Detials
+</li>
+<li class="breadcrumb-item"><a href="/logout">Logout</a></li>{% endblock %} {% block content %}
+
+<body class="bg-light">
+    <div class="container py-4" style="margin: 0;">
+        <div class="card card-body mb-5">
+            <div class="row row-cols-1 row-cols-lg-2 g-2">
+
+
+                <div class="col-sm-4 ">
+
+                    {% set fname = 'uploads/' + book.photo %}
+                    <img class="rounded mx-auto d-block w-75 fixed-center" src="{{url_for('static',filename=fname)}}" alt="First slide">
+
+                </div>
+
+
+                <div class="col">
+                    <!-- Section: Product Infomation //-->
+                    <div class="flex-grow-1">
+                        <div class="h-100 d-flex flex-column">
+                            <div class="flex-grow-1">
+                                <h3 class="text-muted text-uppercase mb-1" id='namepr{{book.id}}'>{{book.name}}</h3>
+                                <div class="container-lg py-lg-0 align-content-center">
+                                    <center>
+                                        <br>
+                                        <hr>
+                                        <h3 class="text-muted ">Description</h3>
+                                    </center>
+                                    <hr>
+                                    <p> {{book.des}} </p>
+                                    <hr>
+
+
+                                    <div class="fs-4 fw-bold mb-2 h3">₹ {{book.price}}</div>
+                                    <p class="small mb-0"><span class="fw-bold">Author: {{book.auther}}<br></span>Post-Date: {{book.date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" align-items-center">
+                            <!-- jquery id button -->
+                            <button id="popcart" class="btn btn-primary cart" onclick=" window.location.href='/purchase/{{book.id}} '">Purchase</button>
+                            <!-- end jquery -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+{%endblock%}

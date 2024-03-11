@@ -1,0 +1,78 @@
+<hr>
+<div class="contaienr " id="con">
+    {%for book in books %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img class=" w-25 " src="{{url_for( 'static',filename=fname)}} ">
+                <div class="col">
+                    <a href="/book/{{book.slug}} ">{{book.name}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <hr> {%endfor%}
+</div>
+
+
+
+
+
+
+
+
+<header id="header" class="header item align-items-center ">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="text-homeimage">
+                <div class="maintext-image text-center" data-scrollreveal="enter top over 1.5s after 0.1s">
+                    <!-- <u> Learning Point</u> -->
+                    <u> StorySpace</u>
+
+                </div>
+                <div class="subtext-image " data-scrollreveal="enter bottom over 1.7s after 0.3s">
+                    Find your Books
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<div class="row">
+    <!-- HERE COMES FOR  -->
+    {%for n in range(4,0,-1) %}{% set fname = 'uploads/' + books[n].photo %}
+    <div class="col-md-3">
+        <div class="productbox">
+            <div class="fadeshop">
+                <div class="captionshop text-center" style="display: none;">
+                    <h3> {{books[n].name[0:15]}}</h3>
+                    <p style="font-size: medium;">
+                        {{books[n].des[0:95]}}.....
+
+                    </p>
+                    <p>
+                        <!-- jquery id button -->
+                        <a href="#" class="learn-more detailslearn"><i class="fa fa-shopping-cart"></i> Purchase</button>
+                        <!--end jquery  -->
+                        <a href="/book/{{books[n].slug}}" class="learn-more detailslearn"><i class="fa fa-link"></i> Details</a>
+                    </p>
+                </div>
+                <span class="maxproduct"><img src="{{url_for('static', filename=fname)}}" alt="" height="300px" width="260px"></span>
+            </div>
+            <div class="product-details">
+                <a href="/book/{{books[n].slug}}">
+                    <h1 class="border" style="padding: .3em; font-size: small;">{{books[n].name[0:15]}}</h1>
+                </a>
+                <span class="price">
+                    <span class="edd_price"><i class="fa fa-rupee"></i> {{books[n].price}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    {%endfor%}

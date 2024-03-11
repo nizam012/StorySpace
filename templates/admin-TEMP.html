@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% block title%}Admin{% endblock %} {% block content %}
+<br> {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+<div class="alert alert-danger alter-dismissable fade show" style="margin: 0;" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+{% else %}
+
+<div class="alert alert-success alter-dismissable fade show " style="margin: 0;" role="alert ">
+    {{ message }}
+    <button type="button " class="close " data-dismiss="alert ">
+        <span aria-hidden="true ">&times;</span>
+      </button>
+</div>
+{% endif %} {% endfor %} {% endif %} {% endwith %}
+<style>
+    .alert-error {
+        padding: 8px;
+        background-color: red;
+        color: white;
+    }
+</style>
+<div class="container">
+    <table class="table table-responsive ">
+        <thead>
+            <tr>
+                <th scope="col">id </th>
+                <th scope="col">name</th>
+                <th scope="col">email</th>
+            </tr>
+        </thead>
+        {% if users %}
+        <tbody>
+            {%for row in users %}
+            <tr>
+                <td scope="row">{{row.id}} </th>
+                    <td>{{row.username}} </td>
+                    <td>{{row.email}} </td>
+
+                    <td><button class="btn btn-primary">edit</button></td>
+                    <td><a href="/delete/{{row.id}}"><button class="btn btn-primary" action='/delete'>delete</button></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{%endif%}
+
+<div class="container-sm">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th scope="col-sm">seller_id </th>
+                <th scope="col-sm">seller name </th>
+                <th scope="col-sm">phone</th>
+                <th scope="col-sm">name</th>
+                <th scope="col">file_name </th>
+            </tr>
+        </thead>
+        {% if books %}
+        <br><br>
+        <tbody>
+            {%for row in books %}
+            <tr>
+                <th scope="row">{{row.id}} </th>
+                <th>{{row.seller_name}} </th>
+                <td>{{row.seller_name}} </td>
+                <td>{{row.seller_phone}} </td>
+                <td>{{row.name}} </td>
+
+                <td><button class="btn btn-primary">edit</button></td>
+                <td><a href="/delete/{{row.id}}"><button class="btn btn-primary" action='/delete'>delete</button></a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{%endif%} {%endblock%}

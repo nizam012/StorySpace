@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/madecss.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/invoice.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <title>{% block title %}Home{% endblock %}</title>
+    <link href="{{ url_for('static', filename='images/books.png') }}" rel="icon">
+
+</head>
+
+<body>
+    <header id="header" class="header  align-items-center ">
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #ffffff;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <h3 style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                    <!-- <span style="color:red">L</span>earning <span style="color:red">P</span>oint</a> -->
+                    <span style="color:red">S</span>tory <span style="color:red">S</span>pace</a>
+                </h3>
+                <div class="navbar-nav ml-auto">
+
+                    <ol class="breadcrumb" style="padding: .4em;">
+                        {% block nav %} {% endblock %}
+                    </ol>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container" style="position: relative;">
+        {% block content %} {% endblock %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+    <script>
+        let searchable = [
+            "Spider man",
+            "Harry potter",
+            "imprints",
+            "Game of Throns",
+            "Love",
+        ];
+
+        const searchInput = document.getElementById('search');
+        const searchWrapper = document.querySelector('.wrapper');
+        const resultsWrapper = document.querySelector('.results');
+
+        searchInput.addEventListener('keyup', () => {
+            let results = [];
+            let input = searchInput.value;
+            if (input.length) {
+                results = searchable.filter((item) => {
+                    return item.toLowerCase().includes(input.toLowerCase());
+                });
+            }
+            renderResults(results);
+        });
+
+        function renderResults(results) {
+            if (!results.length) {
+                return searchWrapper.classList.remove('show');
+            }
+            let content = results
+                .map((item) => {
+                    return `<li><a href='#'>${item} </a></li>`;
+                })
+                .join('');
+            searchWrapper.classList.add('show');
+            resultsWrapper.innerHTML = `<ul>${content}</ul>`
+        }
+    </script>
+    {% block js%} {%endblock%}
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+{%extends "base.html"%}{% block nav %}
+
+<li class="breadcrumb-item active"><a href="/home">Home</a></li>{% endblock %} {% block content %}
+
+<style>
+    .cont {
+        margin-top: 10px;
+        background: #eee;
+        padding: 1em;
+    }
+</style>
+{%if books%}
+<div class="invoice-footer mt25">
+    <p class="text-center"> <strong> Click to</strong>{{books.date}} <a onclick="window.print()" class="btn btn-default ml15"><i class="fa fa-print mr5"></i> Print</a></p>
+</div> {%for books in books %}
+<div class="container bootdey">
+    <div class="row invoice row-printable">
+        <div class="col-md-12">
+            <!-- col-lg-12 start here -->
+            <div class="panel panel-default plain" id="dash_0">
+                <!-- Start .panel -->
+                <div class="panel-body p30">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- col-lg-12 start here -->
+                            <div class="invoice-details mt25">
+                                <div class="well">
+                                    <ul class="list-unstyled mb0">
+                                        <div class="cont">
+                                            <li><strong>Invoice : </strong>{{books.id}}</li>
+                                            <li><strong>Invoice Date : </strong> {{books.date}} </li>
+                                            <li><strong>Name of : </strong> {{books.purchase_name}} </li>
+                                            <!-- <li><strong>Address of : </strong> {{books.address}} </li> -->
+                                            <li><strong>Status : </strong> <span class="label label-danger">PAID</span></li>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="invoice-to mt25">
+                                <!-- <ul class="list-unstyled">
+                                    <li><strong class="text-uppercase"><strong>Seller Name : </strong>{{books.seller_name}}</strong>
+                                    </li>
+                                    <p>
+                                        <strong>Seller Phone No. : </strong>{{books.seller_phone}}
+                                    </p>
+                                </ul>
+                            </div> -->
+                                <div class="invoice-items">
+                                    <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th class="per70 text-center">Sno</th>
+                                                    <th class="per70 text-center">Description</th>
+                                                    <th class="per5 text-center">Qty</th>
+                                                    <th class="per25 text-center">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>01</td>
+                                                    <td>{{books.book_name}}</td>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-center"> <i class="fa fa-rupee"></i> {{books.price}}</th>
+                                                </tr>
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="2" class="text-right">Total:</th>
+                                                    <td class="text-center">1</td>
+                                                    <th class="text-center"> <i class="fa fa-rupee"></i> {{books.price}}</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- col-lg-12 end here -->
+                        </div>
+                        <!-- End .row -->
+                    </div>
+                </div>
+                <!-- End .panel -->
+            </div>
+            <!-- col-lg-12 end here -->
+        </div>
+    </div>
+    {%endfor%} {%else%}
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="col-2">
+                <div class="pull-right" style="margin-top:10px;">
+                    <div class="col-md-10 col-md-offset-1 ">
+                        <img class="img-error" src="{{ url_for( 'static', filename='images/not_found.png' ) }} ">
+                    </div>
+                </div>
+            </div>
+            <div class="col" style='margin-top: 1.3in ;margin-left: 1.5in;'>
+                <h2>No Book Purchased</h2>
+                <div class="error-actions">
+                    <a href="/home" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Back Home
+                    </a>
+                </div>
+            </div>
+            <div class="col" style="margin-top:2em ;">
+                <img src="{{url_for('static',filename='images/image-asset.jpeg') }}" width="250px" height="auto" alt="">
+            </div>
+        </div>
+
+    </div> {%endif%} {%endblock%}

@@ -1,0 +1,69 @@
+{%extends "base.html"%} {% block title %}Seller_form{% endblock %}{% block nav %}
+<li class="breadcrumb-item"><a href="/home">Home</a></li>{% endblock %}{% block content %} {% with messages = get_flashed_messages(with_categories=true) %} {% if messages%} {% for category, message in messages %} {% if category == 'error' %}
+<div class="alert alert-danger alter-dismissable fade show" style="margin: 0;" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+{% endif %} {% endfor %} {% endif %} {% endwith %}
+
+
+<div class="bg-light">
+    <div class="container py-4" style="margin: 0;">
+        <div class="card card-body mb-5">
+            <form method="post" action='seller' enctype="multipart/form-data">
+                <div class="card card-body mb-5">
+                    <div class="form-row">
+
+                        <div class="form-group col-md-3">
+                            <br>
+                            <label for="inputEmail4">User Name</label>
+                            <input type="Text" class="form-control" id="uname" name="uname">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <br>
+                            <label for="inputEmail4">Phone Number</label>
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputEmail4">Address</label>
+                            <textarea id="address" name="address" class="form-control" placeholder="address" required="required" data-error="Please, leave us a message."></textarea>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputEmail4">Book Name</label>
+                            <input type="Text" class="form-control" id="nameb" name="nameb">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputPassword4">Book Category</label>
+                            <input type="text" class="form-control" id="category" name="category">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Book Descriptions</label>
+                        <textarea id="form_message" name="desc" class="form-control" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="inputCity">Author</label>
+                            <input type="text" class="form-control" id="author" name='author'>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Price</label>
+                            <input type="text" class="form-control" id="price" placeholder="₹ " name="price">
+                        </div>
+                        <div class="form-group col-md-4" style='margin-top:11px'>
+                            <label for="exampleFormControlFile1">Input Image</label>
+                            <input type="file" class="form-control-file " id="fileInput" name="image">
+                        </div>
+                    </div>
+                </div>
+                <center>
+                    <button type="submit" class="btn btn-outline-success col-md-4">Add New Book</button>
+                </center>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %} {% block title%}Admin{% endblock %} {% block content %}
+<br> {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+<div class="alert alert-danger alter-dismissable fade show" style="margin: 0;" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+{% else %}
+
+<div class="alert alert-success alter-dismissable fade show " style="margin: 0;" role="alert ">
+    {{ message }}
+    <button type="button " class="close " data-dismiss="alert ">
+        <span aria-hidden="true ">&times;</span>
+      </button>
+</div>
+{% endif %} {% endfor %} {% endif %} {% endwith %}
+
+
+<div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+        <ol class="breadcrumb" style="padding:1em;">
+            <li class="breadcrumb-item"><a href='/login'>Home</a></li>
+            <li class="breadcrumb-item">Tables</li>
+
+        </ol>
+    </nav>
+</div>
+
+<div class="continer row">
+    <div class="card col-1 " id="admin_user">
+        <div class="card-body rounded">
+            <h2 class="card-title co ">User Table</h2>
+            <br>
+            <!-- Active Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
+
+                    </tr>
+                </thead>
+                {% if users %}
+                <tbody>
+                    {%for row in users %}
+                    <tr>
+                        <td scope="row ">{{row.id}} </th>
+                            <td>{{row.username}} </td>
+                            <td>{{row.email}} </td>
+                            <td style="padding: 0; "><a class="btn btn-outline-danger " href="/delete/{{row.id}} ">delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {%endif%}
+        </div>
+    </div>
+
+
+    <!-- <div style="margin-left: 0px;"> -->
+    <!-- <div class="card " id="admin_admin">
+        <div class="row row-cols-3">
+            <div class="card-body rounded">
+                <h3 class="card-title co">Admin Table</h3><br>
+                Active Table
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Email</th>
+
+
+                        </tr>
+                    </thead>
+                    {% if admin %}
+                    <tbody>
+                        {%for row in admin %}
+                        <tr>
+                            <td scope="row ">{{row.sno}} </th>
+                                <td>{{row.username}} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {%endif%}
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div style="margin-left: 0px;"> -->
+    <div class="card " id="admin_book">
+        <div class="row row-cols-3">
+            <div class="card-body rounded">
+                <h3 class="card-title co">Books Table</h3><br>
+                <!-- Active Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Book</th>
+                            <th scope="col">category</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">author</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                    </thead>
+                    {% if books %}
+                    <tbody>
+                        {%for row in books %}
+                        <tr>
+                            <td scope="row ">{{row.id}} </th>
+                                <td>{{row.seller_name}} </td>
+                                <td>{{row.name}} </td>
+                                <td>{{row.category}} </td>
+                                <td>{{row.price}} </td>
+                                <td>{{row.auther}} </td>
+                                <td>{{row.date}} </td>
+                                <td style="padding: 0; "><a class="btn btn-outline-danger " href="/delete/{{row.id}} ">delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{%endblock%}
